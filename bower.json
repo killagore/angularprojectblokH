@@ -1,0 +1,22 @@
+{
+  "name": "angular-test-les2",
+  "description": "test applicatie tijdens de 2e workshop",
+  "main": "",
+  "authors": [
+    "Benjamin Parkinson"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.3",
+    "angular-mocks": "^1.6.3",
+    "angular-route": "^1.6.3"
+  }
+}

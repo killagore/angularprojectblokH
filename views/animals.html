@@ -1,0 +1,94 @@
+<div ng-controller="animalController">
+    <h1>Animals</h1>
+    <br>
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." ng-model="search">
+        </div>
+    </div>
+
+    <br><br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Naam</th>
+                <th>Geslacht</th>
+                <th>Soort</th>
+                <th>Hok</th>
+                <th>Verzorger</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="animal in animals | filter: search">
+
+                <td>
+                    <span>{{animal.id}} </span>
+                </td>
+
+                <td>
+                    <span ng-hide="animal.updating">{{animal.name}} </span>
+                    <input type="text" ng-model="animal.name" ng-show="animal.updating">
+                </td>
+
+                <td>{{animal.gender}}</td>
+
+                <td>{{animal.specie| idToNameFilter: 'species'}}</td>
+                <td>{{animal.cage| idToNameFilter: 'cages'}}</td>
+                <td>{{animal.zookeeper| idToNameFilter: 'zookeepers'}}</td>
+                <td><button type="button" class="btn btn-danger" ng-click="deleteAnimal(animal)"> Delete </button></td>
+
+                <td>
+                    <button type="button" class="btn btn-warning" ng-click="animal.updating = true;" ng-hide="animal.updating">	Update</button>
+                    <button type="button" class="btn btn-success" ng-click="updateAnimal(animal)" ng-show="animal.updating">	Save</button>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form name="animalForm" required>
+        <div class="form-group">
+            <h4>Add Animal </h4>
+            <label for="itemInput">Naam</label>
+            <input type="text" class="form-control" name="animalName" id="itemInput" placeholder="Name ..." ng-model="newAnimal.name"
+                required>
+        </div>
+        <div class="form-group">
+            <label for="itemInput">Geslacht</label>
+            <select class="form-control" name="animalGender" ng-model="newAnimal.gender" required>
+                <option value="male">male</option>
+                <option value="female">female</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="itemInput">Soort</label>
+            <select class="form-control" name="animalSpecie" ng-model="newAnimal.specie" ng-options="specie.id as specie.name for specie in species"
+                required></select>
+        </div>
+
+        <div class="form-group">
+            <label for="itemInput">Hok</label>
+            <select class="form-control" name="animalCage" ng-model="newAnimal.cage" ng-options="cage.id as cage.name for cage in cages"
+                required></select>
+        </div>
+
+        <div class="form-group">
+            <label for="itemInput">Verzorger</label>
+            <select class="form-control" name="animalVerzorger" ng-model="newAnimal.zookeeper" ng-options="zookeeper.id as zookeeper.name for zookeeper in zookeepers"
+                required></select>
+        </div>
+
+        <div class="alert alert-danger" ng-show="(animalForm.animalVerzorger.$error.required 
+         || animalForm.animalSpecie.$error.required 
+         || animalForm.animalGender.$error.required
+          || animalForm.animalName.$error.required
+          || animalForm.animalCage.$error.required) && animalForm.$dirty">
+            <strong>Niet alle velden zijn ingevuld!</strong>
+</div>
+<button type="submit" class="btn btn-primary" ng-click="saveNewAnimal()">Save</button>
+</form>
+</div>

@@ -1,0 +1,67 @@
+<div ng-controller="cageController">
+    <h1>cages</h1>
+    <br>
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." ng-model="search">
+        </div>
+    </div>
+
+    <br><br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Naam</th>
+                <th>Soort</th>
+                <th>Type</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="cage in cages | filter: search">
+
+                <td>
+                    <span>{{cage.id}} </span>
+                </td>
+
+                <td>
+                    <span ng-hide="cage.updating">{{cage.name}} </span>
+                    <input type="text" ng-model="cage.name" ng-show="cage.updating">
+                </td>
+
+                <td>{{cage.sort}}</td>
+
+                <td>{{cage.size}}</td>
+
+                <td><button type="button" class="btn btn-danger" ng-click="deleteCage(cage)"> Delete </button></td>
+
+                <td>
+                    <button type="button" class="btn btn-warning" ng-click="cage.updating = true;" ng-hide="cage.updating">	Update</button>
+                    <button type="button" class="btn btn-success" ng-click="updateCage(cage)" ng-show="cage.updating">	Save</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form name="cageForm" required>
+        <div class="form-group">
+            <h4>Add cage </h4>
+            <label for="itemInput">Name</label>
+            <input type="text" name="cageName" class="form-control" id="itemInput" placeholder="Name ..." ng-model="newCage.name" required>
+        </div>
+        <div class="form-group">
+            <label for="itemInput">Soort</label>
+            <select class="form-control" name="cageSort" ng-model="newCage.sort" ng-options="s as s for s in sort" required></select>
+        </div>
+        <div class="form-group">
+            <label for="itemInput">Omvang</label>
+            <select class="form-control" name="cageSize" ng-model="newCage.size" ng-options="s as s for s in size" required></select>
+        </div>
+        <div class="alert alert-danger" ng-show="(cageForm.cageSize.$error.required || cageForm.cageSort.$error.required || cageForm.cageName.$error.required) && cageForm.$dirty ">
+            <strong>Niet alle velden zijn ingevuld!</strong>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-click="cageForm.$valid && saveNewCage()">Save</button>
+    </form>
+</div>

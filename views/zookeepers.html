@@ -1,0 +1,66 @@
+<div ng-controller="zooKeeperController">
+    <h1>zookeepers</h1>
+    <br>
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." ng-model="search">
+        </div>
+    </div>
+
+    <br><br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Naam</th>
+                <th>Geslacht</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="zookeeper in zookeepers | filter: search">
+
+                <td>
+                    <span>{{zookeeper.id}} </span>
+                </td>
+
+                <td>
+                    <span ng-hide="zookeeper.updating">{{zookeeper.name}} </span>
+                    <input type="text" ng-model="zookeeper.name" ng-show="zookeeper.updating">
+                </td>
+
+                <td>{{zookeeper.gender}}</td>
+
+                <td><button type="button" class="btn btn-danger" ng-click="deleteZookeeper(zookeeper)"> Delete </button></td>
+
+                <td>
+                    <button type="button" class="btn btn-warning" ng-click="zookeeper.updating = true;" ng-hide="zookeeper.updating">	Update</button>
+                    <button type="button" class="btn btn-success" ng-click="updateZookeeper(zookeeper)" ng-show="zookeeper.updating">	Save</button>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form name="zookeeperForm" required>
+        <div class="form-group">
+            <h4>Add zookeeper </h4>
+            <label for="itemInput">Name</label>
+            <input type="text" class="form-control" name="zookeeperName" id="itemInput" placeholder="Name ..." ng-model="newZookeeper.name"
+                required>
+        </div>
+        <div class="form-group">
+            <label for="itemInput">Gender</label>
+            <select class="form-control" name="zookeeperGender" ng-model="newZookeeper.gender" required>
+                <option value="male">male</option>
+                <option value="female">female</option>
+            </select>
+        </div>
+
+        <div class="alert alert-danger" ng-show="(zookeeperForm.zookeeperGender.$error.required || zookeeperForm.zookeeperName.$error.required) && zookeeperForm.$dirty">
+            <strong>Niet alle velden zijn ingevuld!</strong>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-click="saveNewZookeeper()">Save</button>
+    </form>
+</div>

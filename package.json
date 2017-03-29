@@ -1,0 +1,17 @@
+{
+  "name": "angular-test-les2",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "karma start test/karma.conf.js",
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "http-server ."
+  },
+  "author": "Benjamin Parkinson",
+  "license": "ISC"
+}

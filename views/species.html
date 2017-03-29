@@ -1,0 +1,65 @@
+<div ng-controller="specieController">
+    <h1>Species</h1>
+    <br>
+    <div class="col-lg-6">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for..." ng-model="search">
+        </div>
+    </div>
+
+    <br><br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Voedsel</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="specie in species | filter: search">
+
+                <td>
+                    <span>{{specie.id}} </span>
+                </td>
+
+                <td>
+                    <span ng-hide="specie.updating">{{specie.name}} </span>
+                    <input type="text" ng-model="specie.name" ng-show="specie.updating">
+                </td>
+
+                <td>
+                    <span ng-hide="specie.updating">{{specie.food}} </span>
+                    <input type="text" ng-model="specie.food" ng-show="specie.updating">
+                </td>
+
+                <td><button type="button" class="btn btn-danger" ng-click="deleteSpecie(specie)"> Delete </button></td>
+
+                <td>
+                    <button type="button" class="btn btn-warning" ng-click="specie.updating = true;" ng-hide="specie.updating">	Update</button>
+                    <button type="button" class="btn btn-success" ng-click="updateSpecie(specie)" ng-show="specie.updating">	Save</button>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form name="specieForm" required>
+        <div class="form-group">
+            <h4>Add specie </h4>
+            <label for="itemInput">Name</label>
+            <input type="text" name="specieName" class="form-control" id="itemInput" placeholder="Name ..." ng-model="newSpecie.name"
+                required>
+        </div>
+        <div class="form-group">
+            <label for="itemInput">Food</label>
+            <input type="text" name="specieFood" class="form-control" id="itemInput" placeholder="Food ..." ng-model="newSpecie.food" required>
+        </div>
+         <div class="alert alert-danger" ng-show="(specieForm.specieName.$error.required || specieForm.specieFood.$error.required) && specieForm.$dirty">
+            <strong>Niet alle velden zijn ingevuld!</strong>
+        </div>
+        <button type="submit" class="btn btn-primary" ng-click="saveNewSpecie()">Save</button>
+    </form>
+</div>
