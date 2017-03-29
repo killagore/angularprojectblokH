@@ -13,7 +13,8 @@ appModule.factory('CageFactory', function () {
     } else {
         factoryCages = [{ id: 1, name: "vis & co.", sort: "vissen", size: "klein" },
         { id: 2, name: "Vogelhok B", sort: "vogels", size: "groot" },
-        { id: 3, name: "Apenrek", sort: "reptielen", size: "middelgroot" }]
+        { id: 3, name: "Apenrek", sort: "reptielen", size: "middelgroot" }];
+        localStorage.setItem("cages", angular.toJson(factoryCages));
     };
 
 

@@ -11,11 +11,12 @@ appModule.factory('ZooKeeperFactory', function () {
     } else {
 
         factoryZookeepers = [{ id: 1, name: "Harry Hogeboon", gender: "man" },
-        { id: 2, name: "Aad Appel", gender: "man"  },
+        { id: 2, name: "Aad Appel", gender: "man" },
         { id: 3, name: "Tom Van de Boom", gender: "man" },
-        { id: 4, name: "Anemiek Schommels", gender: "vrouw" }]
+        { id: 4, name: "Anemiek Schommels", gender: "vrouw" }];
+        localStorage.setItem("zookeepers", angular.toJson(factoryZookeepers));
     };
-    
+
     factory.getZookeepers = function () {
         return factoryZookeepers
     };

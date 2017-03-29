@@ -13,9 +13,10 @@ appModule.factory('SpecieFactory', function () {
         factorySpecies = [{ id: 1, name: "gorilla", food: "fruit" },
         { id: 2, name: "pig", food: "everything" },
         { id: 3, name: "rabbit", food: "plants" },
-        { id: 4, name: "ape", food: "fruit" }]
+        { id: 4, name: "ape", food: "fruit" }];
+        localStorage.setItem("species", angular.toJson(factorySpecies));
     };
-    
+
     factory.getSpecies = function () {
         return factorySpecies
     };

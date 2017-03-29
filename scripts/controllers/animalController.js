@@ -6,6 +6,7 @@ appModule.controller('animalController', function ($scope, ZooKeeperFactory, Cag
     $scope.cages = CageFactory.getCages();
     $scope.zookeepers = ZooKeeperFactory.getZookeepers();
     $scope.animals = AnimalFactory.getAnimals();
+    
     $scope.deleteAnimal = function (item) {
         AnimalFactory.deleteAnimal(item);
         $scope.animals = AnimalFactory.getAnimals();
